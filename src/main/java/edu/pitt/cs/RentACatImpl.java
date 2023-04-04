@@ -18,8 +18,14 @@ public class RentACatImpl implements RentACat {
 	 */
 
 	public boolean returnCat(int id) {
-		// TODO
-		return false;
+		// TODO done
+		if (cats == null || cats.size() == 0) return false;
+
+		Cat c = getCat(id);
+		if (c != null && c.getRented() == true){
+			c.returnCat();
+			return true;
+		}else return false;
 	}
 
 	/**
@@ -33,23 +39,50 @@ public class RentACatImpl implements RentACat {
 	 */
 
 	public boolean rentCat(int id) {
-		// TODO
-		return false;
+		// TODO done
+		if (cats == null || cats.size() == 0) return false;
+
+		Cat c = getCat(id);
+		if(c==null) return false;
+		else if(c.getRented()) return false;
+		else{
+			c.rentCat();
+			return true;
+		}
 	}
 
 	/**
 	 * Create a String list from the list of cats using the .toString() method of
 	 * each NON-RENTED Cat object in the list. That is, it should only add cats who
 	 * are available to be rented. These cats should be separated by "\n" characters
-	 * (line feeds). Example: ID 1. Jennyanydots ID 2. Old Deuteronomy ID 3.
-	 * Mistoffelees
+	 * (line feeds). 
+	 * Example: ID 1. Jennyanydots ID 2. Old Deuteronomy ID 3. Mistoffelees
 	 * 
 	 * @return "\n"-delimited list of rentable cats
 	 */
 
 	public String listCats() {
 		// TODO
-		return "WRITE CODE FOR THIS";
+
+		//ArrayList<String> catList = new ArrayList<String>();
+		String retStr = "";
+		String next = "";
+
+		// check for empty
+		if (cats == null || cats.size() == 0) return "";
+
+		for(Cat c : cats) {
+			//Cat c = getCat(i);
+			// only add to catList if cat is not rented
+			if(c.getRented() == false) {
+				next = "ID " + c.getId() + ". " + c.getName() + "\n";
+				//catList.add("ID " + c.getId() + ". " + c.getName() + "\n");
+				retStr += next;
+				//retStr = retStr + (c.toString() + "\n");
+			}
+			//retStr = retStr + next;
+		} // end for
+		return retStr;
 	}
 
 	/**
@@ -62,8 +95,15 @@ public class RentACatImpl implements RentACat {
 	 */
 
 	public boolean catExists(int id) {
-		// TODO
-		return false;
+		// TODO done
+		if (cats == null || cats.size() == 0) return false;
+
+		Cat c = getCat(id);
+		if (c == null){
+			return false;
+		}else{
+			return true;
+		}
 	}
 
 	/**
