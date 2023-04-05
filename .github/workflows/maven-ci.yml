@@ -60,7 +60,7 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
-      contents: read
+      contents: write # changed from read to write
 
     steps:
     
